@@ -6,12 +6,13 @@ jdk:
 android:
   components:
     - tools
+    - platform-tools
     - tools
-    - platform-tools-28.0.0
+
     - build-tools-28.0.2
     - android-28
+    - extra-google-m2repository
     - extra-android-m2repository
-    - extra-android-suppor
  
 
   licenses:

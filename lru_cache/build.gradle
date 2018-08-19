@@ -7,6 +7,7 @@ tasks.matching {it instanceof Test}.all {
 
 android {
     compileSdkVersion 28
+    buildToolsVersion "28.0.2"
 
     defaultConfig {
         minSdkVersion 21

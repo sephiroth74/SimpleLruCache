@@ -10,12 +10,14 @@ Simple LruCache for Android
 
 Add the library dependency:
 
-    implementation 'it.sephiroth.android.library.cache:simple-lru-cache-kotlin:**version**'
+    implementation 'it.sephiroth.android.library.cache:simple-lru-cache:**version**'
 
 # Usage
 
 ```
+    // creates a new string lru-cache of 3 elements max 
     val cache = LruCache<String>(3)
+    
     cache[0] = "first"
     cache[1] = "second"
     cache[2] = "third"

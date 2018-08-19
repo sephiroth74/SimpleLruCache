@@ -1,7 +1,29 @@
 # SimpleLruCache
 
-Simple LruCache
+Simple LruCache for Android
 
 
 [![Build Status](https://travis-ci.org/sephiroth74/SimpleLruCache.svg?branch=master)](https://travis-ci.org/sephiroth74/SimpleLruCache)
 
+
+# Installation
+
+Add the library dependency:
+
+    implementation 'it.sephiroth.android.library.cache:simple-lru-cache-kotlin:**version**'
+
+# Usage
+
+```
+    val cache = LruCache<String>(3)
+    cache[0] = "first"
+    cache[1] = "second"
+    cache[2] = "third"
+    cache[3] = "fourth" // key `0` is removed
+    
+    val entry = cache[1] // returns `second`
+    val entry2 = cache[0] // returns null
+    
+    cache.erase(1) // key `1` is removed (now size is 2)
+    
+```

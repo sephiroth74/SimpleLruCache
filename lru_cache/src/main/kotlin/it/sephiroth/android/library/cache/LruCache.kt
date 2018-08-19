@@ -41,10 +41,9 @@ class LruCache<T>(val maxSize: Int) {
      */
     operator fun set(key: Int, value: T) {
         synchronized(lock) {
-            val search = cache[key]
+            val search = remove(key)
             search?.let {
-                add(key, remove(key))
-                //add_entry(key, entry);
+                add(key, search)
             } ?: run {
                 add(key, value)
             }
@@ -57,10 +56,10 @@ class LruCache<T>(val maxSize: Int) {
     operator fun get(key: Int): T? {
         synchronized(lock) {
             var value: T? = null
-            val search = cache[key]
+            val search = remove(key)
             search?.let {
                 value = it.value
-                add(key, remove(key))
+                add(key, search)
             }
             return value
         }
@@ -75,9 +74,9 @@ class LruCache<T>(val maxSize: Int) {
      */
     fun erase(key: Int): T? {
         synchronized(lock) {
-            val search = cache[key]
+            val search = remove(key)
             search?.let {
-                return remove(key).value
+                return it.value
             } ?: run {
                 return null
             }
@@ -86,8 +85,8 @@ class LruCache<T>(val maxSize: Int) {
 
     // private methods
 
-    private fun remove(key: Int): Entry<T> {
-        val entry = cache.remove(key)!!
+    private fun remove(key: Int): Entry<T>? {
+        val entry = cache.remove(key) ?: return null
 
         entry.next?.prev = entry.prev
         entry.prev?.next = entry.next

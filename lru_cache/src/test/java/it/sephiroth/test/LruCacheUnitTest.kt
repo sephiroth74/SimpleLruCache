@@ -156,7 +156,21 @@ class LruCacheUnitTest {
         assertTrue(2 in cache)
         assertFalse(0 in cache)
 
-        // keys should havent changed
+        // keys shouldn't have changed
         assertArrayEquals(arrayOf(1, 4), cache.keys)
+
+        cache[5] = "e" // 2,4,5
+        assertEquals(3, cache.size)
+        assertArrayEquals(arrayOf(2,5), cache.keys)
+
+        assertTrue(2 in cache)
+        assertTrue(4 in cache)
+        assertTrue(5 in cache)
+        assertFalse(0 in cache)
+        assertFalse(1 in cache)
+
+        // keys shouldn't have changed
+        assertArrayEquals(arrayOf(2, 5), cache.keys)
+
     }
 }

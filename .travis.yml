@@ -10,7 +10,6 @@ android:
     - platform-tools-28.0.0
     - build-tools-28.0.2
     - android-28
-    - addon-google_apis-google-28
     - extra-android-m2repository
     - extra-android-suppor
  

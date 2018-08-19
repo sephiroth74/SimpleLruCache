@@ -1,0 +1,57 @@
+language: android
+
+jdk:
+    - oraclejdk8
+
+android:
+  components:
+    - tools
+    - tools
+    - platform-tools
+    - build-tools-28.0.2
+    - android-28
+    - addon-google_apis-google-28
+    - extra-android-m2repository
+    - extra-android-suppor
+    - sys-img-armeabi-v7a-android-28
+ 
+
+  licenses:
+    - 'android-sdk-license-.+'
+    - 'android-sdk-preview-license-.+'
+    - 'google-gdk-license-.+'
+    - 'intel-android-extra-license-.+'
+    - 'google-gdk-license-.+'
+
+notifications:
+  email:
+    - alessandro.crugnola@gmail.com
+
+cache: false
+sudo: false
+
+env:
+  global:
+  # install timeout in minutes (2 minutes by default)
+  - ADB_INSTALL_TIMEOUT=8
+
+# Emulator Management: Create, Start and Wait
+# - echo no | android update sdk --no-ui --filter sys-img-x86_64-google_apis-25 --all
+#- echo no | android create avd --force -n test -t "android-25" --abi x86_64 --tag google_apis --skin WXGA720
+#before_script:
+#  - android list target
+#  - echo no | android create avd --force -n test -t "android-21" --abi armeabi-v7a --tag default --skin WXGA720
+#  - emulator -avd test -no-window &
+#  - android-wait-for-emulator
+#  - adb shell input keyevent 82 &
+
+# use sed to replace the SSH URL with the public URL, then init and update submodules
+before_install:
+  - android update sdk -u -a --filter platform-tools-27.0.3
+
+install:
+    - chmod +x ./gradlew; ls -l gradlew; ./gradlew wrapper -v
+
+script:
+  - ./gradlew clean build test --rerun-tasks -PdisablePreDex
+
